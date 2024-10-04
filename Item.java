@@ -66,4 +66,19 @@ public class Item {
     public void setDescription(String pDescription) {
         description = pDescription;
     }
+
+    /**
+     * This method returns all of the item’s information
+     * @return String that contains the item’s information in the form: 
+     * name [ type ] : description
+     */
+    public String toString() {
+        return new StringBuilder()
+        .append(name)
+        .append(" [ ")
+        .append(type)
+        .append(" ] : ")
+        .append(description)
+        .toString();
+    }
 }
