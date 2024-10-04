@@ -2,6 +2,7 @@
  * The Item class is used to encapsulate information about an item in the game
  * @author Anh Vu
  */
+
 public class Item {
     private String name;
     private String type;
