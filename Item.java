@@ -42,4 +42,28 @@ public class Item {
     public String getDescription() {
         return description;
     }
+    
+    /**
+    * This method sets the name of the item
+    * @param pName The new name of the item
+    */
+    public void setName(String pName) {
+        name = pName;
+    }
+
+    /**
+    * This method sets the type of the item
+    * @param pType The new type of the item
+    */
+    public void setType(String pType) {
+        type = pType;
+    }
+
+    /**
+    * This method sets the description of the item
+    * @param pType The new description of the item
+    */
+    public void setDescription(String pDescription) {
+        description = pDescription;
+    }
 }
