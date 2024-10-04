@@ -18,4 +18,28 @@ public class Item {
         type = pType;
         description = pDescription;
     }
+
+    /**
+    * This method returns name of the item 
+    * @return String contain the name of the item
+    */
+    public String getName() {
+        return name;
+    }
+
+    /**
+    * This method returns the type of the item 
+    * @return String contain the type of the item
+    */
+    public String getType() {
+        return type;
+    }
+
+    /**
+    * This method returns description of the item 
+    * @return String contain the description of the item
+    */
+    public String getDescription() {
+        return description;
+    }
 }
