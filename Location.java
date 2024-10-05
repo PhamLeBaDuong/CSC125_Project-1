@@ -38,7 +38,7 @@ public class Location {
 
     public boolean hasItem(String itemName) {
         for (int i = 0; i < inventory.size(); i++) {
-            if (inventory.get(i).getItemName().equalsIgnoreCase(itemName)) {
+            if (inventory.get(i).getName().equalsIgnoreCase(itemName)) {
                 return true;
             }
         }
@@ -47,7 +47,7 @@ public class Location {
 
     public Item getItem(String itemName) {
         for (int i = 0; i < inventory.size(); i++) {
-            if (inventory.get(i).getItemName().equalsIgnoreCase(itemName)) {
+            if (inventory.get(i).getName().equalsIgnoreCase(itemName)) {
                 return inventory.get(i);
             }
         }
@@ -69,7 +69,7 @@ public class Location {
 
     public Item removeItem(String itemName) {
         for (int i = 0; i < inventory.size(); i++) {
-            if (inventory.get(i).getItemName().equalsIgnoreCase(itemName)) {
+            if (inventory.get(i).getName().equalsIgnoreCase(itemName)) {
                 Item foundItem = inventory.get(i);
                 inventory.remove(i);
                 return foundItem;
