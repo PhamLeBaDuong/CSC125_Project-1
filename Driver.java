@@ -28,6 +28,7 @@ public class Driver {
                     break;
                 case ("look"):
                     System.out.print(currLocation.getLocName());
+                    System.out.print(" - ");
                     System.out.println(currLocation.getLocDescription());
                     for (int i = 0; i < currLocation.numItems(); i += 1) {
                         System.out.println(currLocation.getItem(i));
@@ -42,8 +43,10 @@ public class Driver {
                     }
                     else {
                         System.out.print(itemFound.getName());
+                        System.out.print(" - ");
                         System.out.print(itemFound.getDescription());
                     }
+                    break;
                 default: 
                     System.out.println("I dont know how to do that");
             }

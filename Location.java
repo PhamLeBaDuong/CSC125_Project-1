@@ -8,8 +8,8 @@ public class Location {
 
     //Constructor
     public Location(String locationName, String locationDescription) {
-        locationName = new String();
-        locationDescription = new String();
+        this.locationName = locationName;
+        this.locationDescription = locationDescription;
         inventory = new ArrayList<Item>();
     }
 
@@ -32,31 +32,33 @@ public class Location {
     }
 
     //Specific Methods
-    public void addItem(Item x) {
-        inventory.add(x);
+    public void addItem(Item item) {
+        inventory.add(item);
     }
 
     public boolean hasItem(String itemName) {
+        boolean itemFound = false;
         for (int i = 0; i < inventory.size(); i++) {
             if (inventory.get(i).getName().equalsIgnoreCase(itemName)) {
-                return true;
+                itemFound = true;
             }
         }
-        return false;
+        return itemFound;
     }
 
     public Item getItem(String itemName) {
+        Item foundItem = null;
         for (int i = 0; i < inventory.size(); i++) {
             if (inventory.get(i).getName().equalsIgnoreCase(itemName)) {
-                return inventory.get(i);
+                foundItem = inventory.get(i);
             }
         }
-        return null;
+        return foundItem;
     }
 
-    public Item getItem(int x) {
-        if (x < inventory.size()) {
-            return inventory.get(x);
+    public Item getItem(int index) {
+        if (index < inventory.size()) {
+            return inventory.get(index);
         }
         else {
             return null;
@@ -68,13 +70,13 @@ public class Location {
     }
 
     public Item removeItem(String itemName) {
+        Item foundItem = null;
         for (int i = 0; i < inventory.size(); i++) {
             if (inventory.get(i).getName().equalsIgnoreCase(itemName)) {
-                Item foundItem = inventory.get(i);
+                foundItem = inventory.get(i);
                 inventory.remove(i);
-                return foundItem;
             }
         }
-        return null;
+        return foundItem;
     }
 }
