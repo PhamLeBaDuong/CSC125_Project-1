@@ -9,6 +9,7 @@ public class Driver {
     public static Location currLocation;
     public static void main(String[] args) {
         currLocation = new Location("Kitchen", "A dark kitchen whose lights are flickering");
+
         Item knifeItem = new Item("Knife", "Tool", "Dismantle and Cleave");
         Item turkeyItem = new Item("Turkey", "Food", "Eat");
         Item plateItem = new Item("Plate", "Utensils", "Below the food");
@@ -17,14 +18,15 @@ public class Driver {
         currLocation.addItem(plateItem);
 
         Scanner scanner = new Scanner(System.in);
+
         while (true) {
             System.out.print("Enter command: ");
+            
             String command = scanner.nextLine();
             String[] splttedCommand = command.split(" ");
 
             switch (splttedCommand[0].toLowerCase()) {
-                case (" "):
-                case ("quit"):
+                case (""):
                     break;
                 case ("look"):
                     System.out.print(currLocation.getLocName());
@@ -35,7 +37,7 @@ public class Driver {
                     }
                     break;
                 case ("examine"):
-                    Item itemFound = (splttedCommand.length < 1) 
+                    Item itemFound = (splttedCommand.length > 1) 
                         ? currLocation.getItem(splttedCommand[1])
                         : null;
                     if (itemFound == null) {
@@ -44,8 +46,11 @@ public class Driver {
                     else {
                         System.out.print(itemFound.getName());
                         System.out.print(" - ");
-                        System.out.print(itemFound.getDescription());
+                        System.out.println(itemFound.getDescription());
                     }
+                    break;
+                case ("quit"):
+                    System.exit(0);
                     break;
                 default: 
                     System.out.println("I dont know how to do that");
