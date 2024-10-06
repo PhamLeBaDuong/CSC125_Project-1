@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 /**
  * The Driver class
- * @author Duong_Pham
+ * @author Duong Pham, Anh Vu
  */
 
 public class Driver {
@@ -15,13 +15,37 @@ public class Driver {
         currLocation.addItem(knifeItem);
         currLocation.addItem(turkeyItem);
         currLocation.addItem(plateItem);
+
         Scanner scanner = new Scanner(System.in);
         while (true) {
             System.out.print("Enter command: ");
             String command = scanner.nextLine();
+            String[] splttedCommand = command.split(" ");
 
-            if(command.equalsIgnoreCase("quit")) {
-                break;
+            switch (splttedCommand[0].toLowerCase()) {
+                case (" "):
+                case ("quit"):
+                    break;
+                case ("look"):
+                    System.out.print(currLocation.getLocName());
+                    System.out.println(currLocation.getLocDescription());
+                    for (int i = 0; i < currLocation.numItems(); i += 1) {
+                        System.out.println(currLocation.getItem(i));
+                    }
+                    break;
+                case ("examine"):
+                    Item itemFound = (splttedCommand.length < 1) 
+                        ? currLocation.getItem(splttedCommand[1])
+                        : null;
+                    if (itemFound == null) {
+                        System.out.println("Cannot find that item");
+                    }
+                    else {
+                        System.out.print(itemFound.getName());
+                        System.out.print(itemFound.getDescription());
+                    }
+                default: 
+                    System.out.println("I dont know how to do that");
             }
         }
     }
