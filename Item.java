@@ -1,6 +1,7 @@
 /**
  * The Item class is used to encapsulate information about an item in the game
- * @author Anh Vu
+ * @author Anh Vu, Duong Pham, Devin Best, Evan Lambert
+ * @version October 2024
  */
 
 public class Item {
@@ -22,7 +23,7 @@ public class Item {
 
     /**
     * This method returns name of the item 
-    * @return String contain the name of the item
+    * @return String - name of the item
     */
     public String getName() {
         return name;
@@ -30,7 +31,7 @@ public class Item {
 
     /**
     * This method returns the type of the item 
-    * @return String contain the type of the item
+    * @return String - type of the item
     */
     public String getType() {
         return type;
@@ -38,7 +39,7 @@ public class Item {
 
     /**
     * This method returns description of the item 
-    * @return String contain the description of the item
+    * @return String - description of the item
     */
     public String getDescription() {
         return description;
@@ -46,7 +47,7 @@ public class Item {
     
     /**
     * This method sets the name of the item
-    * @param pName The new name of the item
+    * @param pName New name of the item
     */
     public void setName(String pName) {
         name = pName;
@@ -54,7 +55,7 @@ public class Item {
 
     /**
     * This method sets the type of the item
-    * @param pType The new type of the item
+    * @param pType New type of the item
     */
     public void setType(String pType) {
         type = pType;
@@ -62,7 +63,7 @@ public class Item {
 
     /**
     * This method sets the description of the item
-    * @param pType The new description of the item
+    * @param pType New description of the item
     */
     public void setDescription(String pDescription) {
         description = pDescription;
@@ -70,8 +71,7 @@ public class Item {
 
     /**
      * This method returns all of the item’s information
-     * @return String that contains the item’s information in the form: 
-     * name [ type ] : description
+     * @return String - contains the item’s information in the form: name [ type ] : description
      */
     public String toString() {
         return new StringBuilder()

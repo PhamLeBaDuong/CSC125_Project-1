@@ -1,27 +1,31 @@
 import java.util.Scanner;
 
 /**
- * The Driver class
- * @author Duong Pham, Anh Vu
+ * The Driver class contains an “infinite” loop that continuously prompts the user for the next command and reacts to what they type
+ * @author Anh Vu, Duong Pham, Devin Best, Evan Lambert
+ * @version October 2024
  */
 
 public class Driver {
     public static Location currLocation;
     public static void main(String[] args) {
+        ///Create and initialize "Kitchen" location
         currLocation = new Location("Kitchen", "A dark kitchen whose lights are flickering");
 
         Item knifeItem = new Item("Knife", "Tool", "Dismantle and Cleave");
-        Item turkeyItem = new Item("Turkey", "Food", "Eat");
-        Item plateItem = new Item("Plate", "Utensils", "Below the food");
+        Item turkeyItem = new Item("Turkey", "Food", "Some leftover turkey from Thanksgiving");
+        Item plateItem = new Item("Plate", "Utensils", "A ceramic plate, can be used to hold foods");
         currLocation.addItem(knifeItem);
         currLocation.addItem(turkeyItem);
         currLocation.addItem(plateItem);
 
+        ///Scanner that reads its data from the standard input stream
         Scanner scanner = new Scanner(System.in);
 
+        ///An “infinite” loop that continuously prompts the user for the next command and reacts to what they type
         while (true) {
             System.out.print("Enter command: ");
-            
+
             String command = scanner.nextLine();
             String[] splttedCommand = command.split(" ");
 
@@ -37,9 +41,9 @@ public class Driver {
                     }
                     break;
                 case ("examine"):
-                    Item itemFound = (splttedCommand.length > 1) 
-                        ? currLocation.getItem(splttedCommand[1])
-                        : null;
+                    Item itemFound = (splttedCommand.length != 2) 
+                        ? null
+                        : currLocation.getItem(splttedCommand[1]);
                     if (itemFound == null) {
                         System.out.println("Cannot find that item");
                     }
