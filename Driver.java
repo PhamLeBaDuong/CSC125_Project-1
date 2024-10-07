@@ -12,9 +12,9 @@ public class Driver {
         ///Create and initialize "Kitchen" location
         currLocation = new Location("Kitchen", "A dark kitchen whose lights are flickering");
 
-        Item knifeItem = new Item("Knife", "Tool", "Dismantle and Cleave");
-        Item turkeyItem = new Item("Turkey", "Food", "Some leftover turkey from Thanksgiving");
-        Item plateItem = new Item("Plate", "Utensils", "A ceramic plate, can be used to hold foods");
+        Item knifeItem = new Item("Knife", "Tool", "Dismantle and Cleave, with a huge red stain on it, likely blood");
+        Item turkeyItem = new Item("Turkey", "Food", "Some leftover turkey, smells terrible, likely rotten");
+        Item plateItem = new Item("Plate", "Utensils", "A cracked ceramic plate, can be used to hold foods");
         currLocation.addItem(knifeItem);
         currLocation.addItem(turkeyItem);
         currLocation.addItem(plateItem);
@@ -22,8 +22,11 @@ public class Driver {
         ///Scanner that reads its data from the standard input stream
         Scanner scanner = new Scanner(System.in);
 
+        System.out.println("Welcome to The House");
+
         ///An “infinite” loop that continuously prompts the user for the next command and reacts to what they type
         while (true) {
+            
             System.out.print("Enter command: ");
 
             String command = scanner.nextLine();
@@ -41,23 +44,24 @@ public class Driver {
                     }
                     break;
                 case ("examine"):
-                    Item itemFound = (splttedCommand.length != 2) 
-                        ? null
-                        : currLocation.getItem(splttedCommand[1]);
-                    if (itemFound == null) {
-                        System.out.println("Cannot find that item");
+                    if (splttedCommand.length != 2) {
+                        System.out.println("Please specify the item you want to examine");
                     }
                     else {
-                        System.out.print(itemFound.getName());
-                        System.out.print(" - ");
-                        System.out.println(itemFound.getDescription());
+                        Item itemFound = currLocation.getItem(splttedCommand[1]);
+                        if (itemFound == null) {
+                            System.out.println("Cannot find that item");
+                        }
+                        else {
+                            System.out.println(itemFound.toString());
+                        }
                     }
                     break;
                 case ("quit"):
                     System.exit(0);
                     break;
                 default: 
-                    System.out.println("I dont know how to do that");
+                    System.out.println("Unknown command");
             }
         }
     }
