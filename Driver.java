@@ -24,6 +24,8 @@ public class Driver {
 
         System.out.println("Welcome to The House");
 
+        createWorld();
+
         ///An “infinite” loop that continuously prompts the user for the next command and reacts to what they type
         while (true) {
             
@@ -60,9 +62,71 @@ public class Driver {
                 case ("quit"):
                     System.exit(0);
                     break;
+                case("go west"):
+                    currLocation.getLocation("west");
+                    if(currLocation == null) {
+                        System.out.println("Cannot go that way");
+                    }
+                    else {
+                        currLocation = currLocation.getLocation("west");
+                    }
+                    break;
+                case("go east"):
+                    currLocation.getLocation("east");
+                    if(currLocation == null) {
+                        System.out.println("Cannot go that way");
+                    }
+                    else {
+                        currLocation = currLocation.getLocation("east");
+                    }
+                    break;
+                case("go north"):
+                    currLocation.getLocation("north");
+                    if(currLocation == null) {
+                        System.out.println("Cannot go that way");
+                    }
+                    else {
+                        currLocation = currLocation.getLocation("north");
+                    }
+                    break;
+                case("go south"):
+                    currLocation.getLocation("south");
+                    if(currLocation == null) {
+                        System.out.println("Cannot go that way");
+                    }
+                    else {
+                        currLocation = currLocation.getLocation("south");
+                    }
+                    break;
                 default: 
                     System.out.println("Unknown command");
             }
         }
+    }
+    public static void createWorld() {
+        Location kitchen = new Location("Kitchen", "A dark kitchen whose lights are flickering");
+        Location hallway = new Location("Hallway", "A long line");
+        Location bedroom = new Location("Bedroom", "A place for rest");
+        Location livingroom = new Location("Livingroom", "Not a living room");
+
+        Item knifeItem = new Item("Knife", "Tool", "Dismantle and Cleave, with a huge red stain on it, likely blood");
+        Item turkeyItem = new Item("Turkey", "Food", "Some leftover turkey, smells terrible, likely rotten");
+        Item lambItem = new Item("Lamb", "Decoration", "A lame lamb that lights the room");
+        Item tablItem = new Item("Table", "Decoration", "A thing that is below everything");
+        Item carpetItem = new Item("Carpet", "Decoration", "A thing that seperate the dirt from your feet and the floor");
+
+        kitchen.addItem(knifeItem);
+        kitchen.addItem(turkeyItem);
+        bedroom.addItem(lambItem);
+        livingroom.addItem(tablItem);
+        hallway.addItem(carpetItem);
+
+        kitchen.connect("west", bedroom);
+        bedroom.connect("north", hallway);
+        hallway.connect("east", livingroom);
+        livingroom.connect("west", hallway);
+        hallway.connect("north", kitchen);
+
+        currLocation = kitchen;
     }
 }
