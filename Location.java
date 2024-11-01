@@ -1,16 +1,14 @@
+// package CSC125_Project_1;
 import java.util.ArrayList;
+import java.util.HashMap;
 
-/**
- * The Location class is used to encapsulate information about a single location in the game
- * @author Anh Vu, Duong Pham, Devin Best, Evan Lambert
- * @version October 2024
- */
 
 public class Location {
 
     private String locationName;
     private String locationDescription;
     private ArrayList<Item> inventory;
+    private HashMap<String,Location> connections = new HashMap<String,Location>(); 
 
     /**
      * The constructer used to construct a new Location from name and description information. The inventory 
@@ -18,10 +16,12 @@ public class Location {
      * @param locationName Name of the location
      * @param locationDescription Description of the location
      */
-    public Location(String locationName, String locationDescription) {
+    public Location(String locationName, String locationDescription) 
+    {
         this.locationName = locationName;
         this.locationDescription = locationDescription;
         inventory = new ArrayList<Item>();
+        connections = new HashMap<String,Location>();
     }
 
     /**
@@ -130,5 +130,29 @@ public class Location {
             }
         }
         return foundItem;
+    }
+    public void connect(String dirctName,Location Location)
+    {
+        connections.put(dirctName,Location);
+
+    }
+    public boolean canMove(String dirctName)
+    {
+        Location temp = connections.get(dirctName);
+        String temp2 = temp.toString();
+        if(dirctName.equals(temp2))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+    }
+    public Location getLocation(String dirctName)
+    {
+        return connections.get(dirctName);
+
     }
 }

@@ -1,8 +1,4 @@
-/**
- * The Item class is used to encapsulate information about an item in the game
- * @author Anh Vu, Duong Pham, Devin Best, Evan Lambert
- * @version October 2024
- */
+// package CSC125_Project;
 
 public class Item {
     private String name;
@@ -15,6 +11,7 @@ public class Item {
      * @param pType Type of the item
      * @param pDescription Description of the item
      */
+    
     public Item(String pName, String pType, String pDescription) {
         name = pName;
         type = pType;
