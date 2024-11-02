@@ -19,30 +19,26 @@ public class ContainerItem extends Item
     
     public boolean hasItem(String itemName)
     {
-        boolean itemFound = false; 
         for(int i=0; i < items.size(); i++)
-        {
-            if(items.get(i).getName().equals(itemName))
-            {
-              itemFound = true;
-            }
-        }
-        return itemFound;
-
-    }
-
-    public Item removeItem(String itemName)
-    {
-        Item itemFound = null;
-        for(int i = 0; i < items.size(); i++)
         {
             if(items.get(i).getName().equalsIgnoreCase(itemName))
             {
-                items.remove(i); /// need recheck
-                itemFound = items.get(i);
+              return true;
             }
         }
-        return itemFound; /// need recheck
+        return false;
+
+    }
+
+    public Item removeItem(String itemName) {
+        Item itemFound = null;
+        for (int i = 0; i < items.size(); i++) {
+            if (items.get(i).getName().equalsIgnoreCase(itemName)) {
+                itemFound = items.get(i);
+                items.remove(i); 
+            }
+        }
+        return itemFound; 
     }
     
     @Override
@@ -56,13 +52,17 @@ public class ContainerItem extends Item
         inventoryDes.append(getDescription());
         inventoryDes.append("\n");
 
-        for(int i = 0; i < items.size(); i++)
-        {
-            inventoryDes.append("+");
-            inventoryDes.append(items.get(i).getName());
-            inventoryDes.append("\n");
+        if (items.isEmpty()) {
+            inventoryDes.append("No items in inventory.\n");
         }
-
+        else { 
+            for(int i = 0; i < items.size(); i++)
+            {
+                inventoryDes.append("+ ");
+                inventoryDes.append(items.get(i).getName());
+                inventoryDes.append("\n");
+            }
+        }
         String inventoryDesStr = inventoryDes.toString();
 
         return inventoryDesStr;

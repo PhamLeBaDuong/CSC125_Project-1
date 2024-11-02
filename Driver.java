@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class Driver {
     public static Location currLocation;
-    public static ContainerItem myInventory; /// !!! Need Recheck
+    public static ContainerItem myInventory; 
 
     public static void main(String[] args) {
         myInventory = new ContainerItem("Inventory", "Toolbox", "This is your inventory, which stores the items you feel that can be useful");
@@ -64,7 +64,7 @@ public class Driver {
                         }
                     }
                     break;
-                case("go"):///west
+                case("go"):
                     if(currLocation.canMove(splttedCommand[1])) {
                         currLocation = currLocation.getLocation(splttedCommand[1]);  
                     }
@@ -74,7 +74,7 @@ public class Driver {
                     break;
                 case("inventory"):
                     ///Print list of item (names-only) that are currently stored in the character's inventory
-                    myInventory.toString();
+                    System.out.println(myInventory.toString());;
                     break;
                 case("take"):
                     ///Try to find the matching item at the current location, if found, remove from location and add to inventory, if not print "Cannot find that item here" 
@@ -98,13 +98,13 @@ public class Driver {
                         System.out.println("Please specify the item you want to drop");
                     }
                     else {
-                        Item itemFound = currLocation.getItem(splttedCommand[1]);
-                        if (itemFound == null) {
+                        boolean itemFound = myInventory.hasItem(splttedCommand[1]);
+                        if (!itemFound) {
                             System.out.println("Cannot find that item in your inventory");
                         }
                         else {
-                            myInventory.removeItem(splttedCommand[1]);
-                            currLocation.addItem(itemFound);
+                            Item itemRemoved = myInventory.removeItem(splttedCommand[1]);
+                            currLocation.addItem(itemRemoved);
                         }
                     }
                     break;
@@ -154,10 +154,16 @@ public class Driver {
         hallway.addItem(carpetItem);
 
         kitchen.connect("west", bedroom);
+        bedroom.connect("east", kitchen);
+
         bedroom.connect("north", hallway);
+        hallway.connect("south", bedroom);
+
         hallway.connect("east", livingroom);
         livingroom.connect("west", hallway);
-        hallway.connect("north", kitchen);
+
+        livingroom.connect("south", kitchen);
+        kitchen.connect("north", livingroom);
 
         currLocation = kitchen;
     }

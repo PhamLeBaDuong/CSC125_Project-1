@@ -70,13 +70,12 @@ public class Location {
     * @return Boolean - return true if the item is found and false if not
     */
     public boolean hasItem(String itemName) {
-        boolean itemFound = false;
         for (int i = 0; i < inventory.size(); i++) {
             if (inventory.get(i).getName().equalsIgnoreCase(itemName)) {
-                itemFound = true;
+                return true;
             }
         }
-        return itemFound;
+        return false;
     }
 
     /**
@@ -85,13 +84,12 @@ public class Location {
     * @return Item - the matching Item object if found, null if not
     */
     public Item getItem(String itemName) {
-        Item foundItem = null;
         for (int i = 0; i < inventory.size(); i++) {
             if (inventory.get(i).getName().equalsIgnoreCase(itemName)) {
-                foundItem = inventory.get(i);
+                return inventory.get(i);
             }
         }
-        return foundItem;
+        return null;
     }
 
     /**
@@ -131,6 +129,7 @@ public class Location {
         }
         return foundItem;
     }
+    
     public void connect(String dirctName,Location Location)
     {
         connections.put(dirctName,Location);
