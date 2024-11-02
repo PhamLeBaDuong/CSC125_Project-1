@@ -44,7 +44,8 @@ public class Driver {
                     System.out.print(" - ");
                     System.out.println(currLocation.getLocDescription());
                     for (int i = 0; i < currLocation.numItems(); i += 1) {
-                        System.out.println(currLocation.getItem(i));
+                        System.out.print("+ ");
+                        System.out.println(currLocation.getItem(i).getName());
                     }
                     break;
                 case ("examine"):
@@ -61,58 +62,76 @@ public class Driver {
                         }
                     }
                     break;
-                case("go west"):
-                    currLocation.getLocation("west");
-                    if(currLocation == null) {
-                        System.out.println("Cannot go that way");
+                case("go"):///west
+                    if(currLocation.canMove(splttedCommand[1])) {
+                        currLocation = currLocation.getLocation(splttedCommand[1]);  
                     }
                     else {
-                        currLocation = currLocation.getLocation("west");
-                    }
-                    break;
-                case("go east"):
-                    currLocation.getLocation("east");
-                    if(currLocation == null) {
                         System.out.println("Cannot go that way");
-                    }
-                    else {
-                        currLocation = currLocation.getLocation("east");
-                    }
-                    break;
-                case("go north"):
-                    currLocation.getLocation("north");
-                    if(currLocation == null) {
-                        System.out.println("Cannot go that way");
-                    }
-                    else {
-                        currLocation = currLocation.getLocation("north");
-                    }
-                    break;
-                case("go south"):
-                    currLocation.getLocation("south");
-                    if(currLocation == null) {
-                        System.out.println("Cannot go that way");
-                    }
-                    else {
-                        currLocation = currLocation.getLocation("south");
                     }
                     break;
                 case("inventory"):
                     ///Print list of item (names-only) that are currently stored in the character's inventory
+                    myInventory.toString();
                 case("take"):
                     ///Try to find the matching item at the current location, if found, remove from location and add to inventory, if not print "Cannot find that item here" 
+                    if (splttedCommand.length != 2) {
+                        System.out.println("Please specify the item you want to take");
+                    }
+                    else {
+                        Item itemFound = currLocation.getItem(splttedCommand[1]);
+                        if (itemFound == null) {
+                            System.out.println("Cannot find that item here");
+                        }
+                        else {
+                            currLocation.removeItem(splttedCommand[1]);
+                            myInventory.addItem(itemFound);
+                        }
+                    }
+                    break;
                 case("drop"):
                     ///Try to find the matching item in the character's inventory, remove it and add to the current location
+                    if (splttedCommand.length != 2) {
+                        System.out.println("Please specify the item you want to drop");
+                    }
+                    else {
+                        Item itemFound = currLocation.getItem(splttedCommand[1]);
+                        if (itemFound == null) {
+                            System.out.println("Cannot find that item in your inventory");
+                        }
+                        else {
+                            myInventory.removeItem(splttedCommand[1]);
+                            currLocation.addItem(itemFound);
+                        }
+                    }
+                    break;
                 case("help"):
                     ///Print all the commands currently supported with a one-sentence description
+                    System.out.println(commandDes("look", "Display location's name, description and item available there"));
+                    System.out.println(commandDes("examine", "Display item's types and description"));
+                    System.out.println(commandDes("inventory", "Inspect your inventory"));
+                    System.out.println(commandDes("go", "Go in the direction that you wanted"));
+                    System.out.println(commandDes("take", "Add an item that is available in your current location to your inventory"));
+                    System.out.println(commandDes("drop", "Drop an item from you inventory"));
+                    System.out.println(commandDes("quit", "Exit the game"));
+                    break;
                 case ("quit"):
                     System.exit(0);
                     break;
                 default: 
-                    System.out.println("Unknown command");
+                    System.out.println("Unknown command, use help for all available commands");
             }
         }
     }
+
+    public static String commandDes(String command, String description) {
+        return new StringBuilder()
+        .append(command)
+        .append(" - ")
+        .append(description)
+        .toString();
+    }
+
     public static void createWorld() {
         Location kitchen = new Location("Kitchen", "A dark kitchen whose lights are flickering");
         Location hallway = new Location("Hallway", "A long line");

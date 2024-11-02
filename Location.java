@@ -134,8 +134,8 @@ public class Location {
     public void connect(String dirctName,Location Location)
     {
         connections.put(dirctName,Location);
-
     }
+    
     public boolean canMove(String dirctName)
     {
         Location temp = connections.get(dirctName);
