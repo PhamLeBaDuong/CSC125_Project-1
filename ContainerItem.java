@@ -15,6 +15,7 @@ public class ContainerItem extends Item
     {
         items.add(pItem);
     }
+    
     public boolean hasItem(String itemName)
     {
         for(int i=0; i < items.size(); i++)

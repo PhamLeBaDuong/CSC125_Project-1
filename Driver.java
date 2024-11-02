@@ -8,6 +8,8 @@ import java.util.Scanner;
 
 public class Driver {
     public static Location currLocation;
+    public static ContainerItem myInventory;
+
     public static void main(String[] args) {
         ///Create and initialize "Kitchen" location
         currLocation = new Location("Kitchen", "A dark kitchen whose lights are flickering");
@@ -59,9 +61,6 @@ public class Driver {
                         }
                     }
                     break;
-                case ("quit"):
-                    System.exit(0);
-                    break;
                 case("go west"):
                     currLocation.getLocation("west");
                     if(currLocation == null) {
@@ -97,6 +96,17 @@ public class Driver {
                     else {
                         currLocation = currLocation.getLocation("south");
                     }
+                    break;
+                case("inventory"):
+                    ///Print list of item (names-only) that are currently stored in the character's inventory
+                case("take"):
+                    ///Try to find the matching item at the current location, if found, remove from location and add to inventory, if not print "Cannot find that item here" 
+                case("drop"):
+                    ///Try to find the matching item in the character's inventory, remove it and add to the current location
+                case("help"):
+                    ///Print all the commands currently supported with a one-sentence description
+                case ("quit"):
+                    System.exit(0);
                     break;
                 default: 
                     System.out.println("Unknown command");
