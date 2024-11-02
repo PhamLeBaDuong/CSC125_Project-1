@@ -135,18 +135,17 @@ public class Location {
     {
         connections.put(dirctName,Location);
     }
-    
+
     public boolean canMove(String dirctName)
     {
         Location temp = connections.get(dirctName);
-        String temp2 = temp.toString();
-        if(dirctName.equals(temp2))
+        if(temp == null)
         {
-            return true;
+            return false;
         }
         else
         {
-            return false;
+            return true;
         }
 
     }
