@@ -18,51 +18,53 @@ public class ContainerItem extends Item
     
     public boolean hasItem(String itemName)
     {
+        boolean itemFound = false; 
         for(int i=0; i < items.size(); i++)
         {
             if(items.get(i).getName().equals(itemName))
             {
-              return true;
+              itemFound = true;
             }
         }
-        return false;
+        return itemFound;
 
     }
+
     public Item removeItem(String itemName)
     {
-    
+        Item itemFound = null;
         for(int i = 0; i < items.size(); i++)
         {
             if(items.get(i).getName().equalsIgnoreCase(itemName))
             {
-                return items.remove(i);
+                items.remove(i); /// need recheck
+                itemFound = items.get(i);
             }
-
         }
-        return null;
+        return itemFound; /// need recheck
     }
     
     @Override
     public String toString()
     {
-        StringBuilder builder = new StringBuilder(20);
-        builder.append(getName());
-        builder.append(" [ ");
-        builder.append(getType());
-        builder.append(" ] : ");
-        builder.append(getDescription());
-        String result = builder.toString();
-        String result2 = new String();
+        StringBuilder inventoryDes = new StringBuilder();
+        inventoryDes.append(getName());
+        inventoryDes.append(" [ ");
+        inventoryDes.append(getType());
+        inventoryDes.append(" ] : ");
+        inventoryDes.append(getDescription());
+        inventoryDes.append("\n");
+
         for(int i = 0; i < items.size(); i++)
         {
-            result2 = result2 + "+ " + items.get(i).getName() + "\n";
-            
+            inventoryDes.append("+");
+            inventoryDes.append(items.get(i).getName());
+            inventoryDes.append("\n");
         }
 
-        String result3 = result + result2;
+        String inventoryDesStr = inventoryDes.toString();
 
-        return result3;
-
+        return inventoryDesStr;
     }
 
 }
