@@ -8,7 +8,7 @@ public class Location {
     private String locationName;
     private String locationDescription;
     private ArrayList<Item> inventory;
-    private HashMap<String,Location> connections = new HashMap<String,Location>(); 
+    private HashMap<String,Location> connections; 
 
     /**
      * The constructer used to construct a new Location from name and description information. The inventory 

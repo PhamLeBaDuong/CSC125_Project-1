@@ -8,9 +8,11 @@ import java.util.Scanner;
 
 public class Driver {
     public static Location currLocation;
-    public static ContainerItem myInventory;
+    public static ContainerItem myInventory; /// !!! Need Recheck
 
     public static void main(String[] args) {
+        myInventory = new ContainerItem("Inventory", "Toolbox", "This is your inventory, which stores the items you feel that can be useful");
+
         ///Create and initialize "Kitchen" location
         currLocation = new Location("Kitchen", "A dark kitchen whose lights are flickering");
 
@@ -73,6 +75,7 @@ public class Driver {
                 case("inventory"):
                     ///Print list of item (names-only) that are currently stored in the character's inventory
                     myInventory.toString();
+                    break;
                 case("take"):
                     ///Try to find the matching item at the current location, if found, remove from location and add to inventory, if not print "Cannot find that item here" 
                     if (splttedCommand.length != 2) {
