@@ -65,8 +65,12 @@ public class Driver {
                     }
                     break;
                 case("go"):
-                    if(currLocation.canMove(splttedCommand[1])) {
-                        currLocation = currLocation.getLocation(splttedCommand[1]);  
+                    if (splttedCommand.length != 2) {
+                        System.out.println("Please specify the direction you want to go");
+                        break;
+                    }
+                    if(currLocation.canMove(splttedCommand[1].toLowerCase())) { ///Need rewrite
+                        currLocation = currLocation.getLocation(splttedCommand[1].toLowerCase());  ///Need rewrite
                     }
                     else {
                         System.out.println("Cannot go that way");
@@ -122,7 +126,7 @@ public class Driver {
                     System.exit(0);
                     break;
                 default: 
-                    System.out.println("Unknown command, use help for all available commands");
+                    System.out.println("Unknown command, type 'help' for all available commands");
             }
         }
     }
@@ -143,13 +147,17 @@ public class Driver {
 
         Item knifeItem = new Item("Knife", "Tool", "Dismantle and Cleave, with a huge red stain on it, likely blood");
         Item turkeyItem = new Item("Turkey", "Food", "Some leftover turkey, smells terrible, likely rotten");
-        Item lambItem = new Item("Lamb", "Decoration", "A lame lamb that lights the room");
-        Item tablItem = new Item("Table", "Decoration", "A thing that is below everything");
-        Item carpetItem = new Item("Carpet", "Decoration", "A thing that seperate the dirt from your feet and the floor");
+        Item lambItem = new Item("Lamb", "Decoration", "A broken old lamb");
+        Item breadItem = new Item("Bread", "Food", "It's bread");
+        Item tablItem = new Item("Table", "Decoration", "An old wooden table, one of its leg is missing");
+        Item carpetItem = new Item("Carpet", "Decoration", "A moldy carpet with weird stains on it");
+        Item boxItem = new Item("Box", "Box", "A tighly locked silver box, look relatively new compare to everything else");
 
         kitchen.addItem(knifeItem);
         kitchen.addItem(turkeyItem);
+        kitchen.addItem(breadItem);
         bedroom.addItem(lambItem);
+        bedroom.addItem(boxItem);
         livingroom.addItem(tablItem);
         hallway.addItem(carpetItem);
 
@@ -161,6 +169,8 @@ public class Driver {
 
         hallway.connect("east", livingroom);
         livingroom.connect("west", hallway);
+
+
 
         livingroom.connect("south", kitchen);
         kitchen.connect("north", livingroom);
