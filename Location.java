@@ -1,7 +1,12 @@
-// package CSC125_Project_1;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * The Location class is used to encapsulate information about a single location in the game
+ * @author Anh Vu, Duong Pham, Devin Best, Evan Lambert
+ * @version October 2024
+ * @version November 2024
+ */
 
 public class Location {
 

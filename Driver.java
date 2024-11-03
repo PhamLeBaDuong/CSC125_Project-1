@@ -1,9 +1,10 @@
 import java.util.Scanner;
 
 /**
- * The Driver class contains an “infinite” loop that continuously prompts the user for the next command and reacts to what they type
+ * The Driver class contains an “infinite” loop that continuously prompts the user for the next command and reacts to what they type. It also initialized and construct the world 
  * @author Anh Vu, Duong Pham, Devin Best, Evan Lambert
  * @version October 2024
+ * @version November 2024
  */
 
 public class Driver {

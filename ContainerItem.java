@@ -1,6 +1,10 @@
-// package CSC125_Project_1;
-
 import java.util.ArrayList;
+
+/**
+ * The ContainerItem class is a specialized Item with the additional ability to store Items inside of itself
+ * @author Anh Vu, Duong Pham, Devin Best, Evan Lambert
+ * @version November 2024
+ */
 
 public class ContainerItem extends Item 
 {
