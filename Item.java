@@ -1,4 +1,9 @@
-// package CSC125_Project;
+/**
+ * The Item class is used to encapsulate information about an item in the game
+ * @author Anh Vu, Duong Pham, Devin Best, Evan Lambert
+ * @version October 2024
+ * @version November 2024
+ */
 
 public class Item {
     private String name;

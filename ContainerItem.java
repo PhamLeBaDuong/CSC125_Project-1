@@ -1,10 +1,15 @@
-// package CSC125_Project_1;
-
 import java.util.ArrayList;
+
+/**
+ * The ContainerItem class is a specialized Item with the additional ability to store Items inside of itself
+ * @author Anh Vu, Duong Pham, Devin Best, Evan Lambert
+ * @version November 2024
+ */
 
 public class ContainerItem extends Item 
 {
     private ArrayList<Item> items;
+    
     public ContainerItem(String cName, String cType, String cDescription)
     {
        super(cName,cType,cDescription);
@@ -15,11 +20,12 @@ public class ContainerItem extends Item
     {
         items.add(pItem);
     }
+    
     public boolean hasItem(String itemName)
     {
         for(int i=0; i < items.size(); i++)
         {
-            if(items.get(i).getName().equals(itemName))
+            if(items.get(i).getName().equalsIgnoreCase(itemName))
             {
               return true;
             }
@@ -27,41 +33,43 @@ public class ContainerItem extends Item
         return false;
 
     }
-    public Item removeItem(String itemName)
-    {
-    
-        for(int i = 0; i < items.size(); i++)
-        {
-            if(items.get(i).getName().equalsIgnoreCase(itemName))
-            {
-                return items.remove(i);
-            }
 
+    public Item removeItem(String itemName) {
+        Item itemFound = null;
+        for (int i = 0; i < items.size(); i++) {
+            if (items.get(i).getName().equalsIgnoreCase(itemName)) {
+                itemFound = items.get(i);
+                items.remove(i); 
+            }
         }
-        return null;
+        return itemFound; 
     }
     
     @Override
     public String toString()
     {
-        StringBuilder builder = new StringBuilder(20);
-        builder.append(getName());
-        builder.append(" [ ");
-        builder.append(getType());
-        builder.append(" ] : ");
-        builder.append(getDescription());
-        String result = builder.toString();
-        String result2 = new String();
-        for(int i = 0; i < items.size(); i++)
-        {
-            result2 = result2 + "+ " + items.get(i).getName() + "\n";
-            
+        StringBuilder inventoryDes = new StringBuilder();
+        inventoryDes.append(getName());
+        inventoryDes.append(" [ ");
+        inventoryDes.append(getType());
+        inventoryDes.append(" ] : ");
+        inventoryDes.append(getDescription());
+        inventoryDes.append("\n");
+
+        if (items.isEmpty()) {
+            inventoryDes.append("No items in inventory.\n");
         }
+        else { 
+            for(int i = 0; i < items.size(); i++)
+            {
+                inventoryDes.append("+ ");
+                inventoryDes.append(items.get(i).getName());
+                inventoryDes.append("\n");
+            }
+        }
+        String inventoryDesStr = inventoryDes.toString();
 
-        String result3 = result + result2;
-
-        return result3;
-
+        return inventoryDesStr;
     }
 
 }
