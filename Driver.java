@@ -60,6 +60,11 @@ public class Driver {
                         if (itemFound == null) {
                             System.out.println("Cannot find that item");
                         }
+                        else if(itemFound instanceof ContainerItem)
+                        {
+                            ContainerItem containerItem = (ContainerItem) itemFound;
+                            System.out.println(containerItem.toString());
+                        }
                         else {
                             System.out.println(itemFound.toString());
                         }
@@ -153,14 +158,31 @@ public class Driver {
         Item tablItem = new Item("Table", "Decoration", "An old wooden table, one of its leg is missing");
         Item carpetItem = new Item("Carpet", "Decoration", "A moldy carpet with weird stains on it");
         Item boxItem = new Item("Box", "Box", "A tighly locked silver box, look relatively new compare to everything else");
+        
+        ContainerItem desk = new ContainerItem("Desk", "Decoration", "The one below all");
+        desk.addItem(new Item("Pen", "Tool", "A thing that makes you ace Chad's exams."));
+        desk.addItem(new Item("Notebook", "Tool", "A notebook that can be written."));
+
+        ContainerItem chest = new ContainerItem("Chest", "Tool", "A thing that store another thing");
+        chest.addItem(new Item("Coin", "Treasure", "A shiny gold coin."));
+        chest.addItem(new Item("Map", "Tool", "A tattered map of the surrounding area."));
+
+        ContainerItem vault = new ContainerItem("Vault", "Tool", "A safe that store valuable things");
+        vault.addItem(new Item("Diamond", "Gem", "A thing that can make you rich."));
+        vault.addItem(new Item("Key", "Tool", "A thing that lead to another thing."));
 
         kitchen.addItem(knifeItem);
         kitchen.addItem(turkeyItem);
+        kitchen.addItem(desk);
         kitchen.addItem(breadItem);
         bedroom.addItem(lambItem);
         bedroom.addItem(boxItem);
+        bedroom.addItem(vault);
         livingroom.addItem(tablItem);
+        livingroom.addItem(chest);
         hallway.addItem(carpetItem);
+
+        kitchen.addItem(boxItem);
 
         kitchen.connect("west", bedroom);
         bedroom.connect("east", kitchen);
