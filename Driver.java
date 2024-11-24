@@ -88,9 +88,14 @@ public class Driver {
                     }
                     else if (splttedCommand.length > 2) {
                         if (splttedCommand[2].equals("from")) {
-                            ContainerItem containerFound = (ContainerItem) currLocation.getItem(splttedCommand[3]);
+                            ContainerItem containerFound =  null;
+                            
+                            if(currLocation.getItem(splttedCommand[3]) instanceof ContainerItem) {
+                                containerFound = (ContainerItem) currLocation.getItem(splttedCommand[3]);
+                            }
+                            
                             if (containerFound == null) {
-                                System.out.println("Cannot find that container here");
+                                System.out.println("Cannot find that container here, or mentioned item is not a container");
                                 break;
                             }
 
@@ -130,16 +135,19 @@ public class Driver {
                 case ("put"):
                     if (splttedCommand.length == 4) {
                         if (splttedCommand[2].equals("in")) {
-                            ContainerItem containerFound = (ContainerItem) currLocation.getItem(splttedCommand[3]);
+                            ContainerItem containerFound = null;
+                            if(currLocation.getItem(splttedCommand[3]) instanceof ContainerItem) {
+                                containerFound = (ContainerItem) currLocation.getItem(splttedCommand[3]);
+                            }
 
                             if (containerFound == null) {
-                                System.out.println("Cannot find that container here");
+                                System.out.println("Cannot find that container here, or mentioned item is not a container");
                                 break;
                             }
 
                             boolean itemFound = myInventory.hasItem(splttedCommand[1]);
                             if (!itemFound) {
-                                System.out.println("Cannot find that item in this container");
+                                System.out.println("Cannot find that item in your inventory");
                             }
                             else {
                                 Item itemRemoved = myInventory.removeItem(splttedCommand[1]);
@@ -157,8 +165,8 @@ public class Driver {
                 case("help"):
                     ///Print all the commands currently supported with a one-sentence description
                     System.out.println(commandDes("look", "Display location's name, description and item available there"));
-                    System.out.println(commandDes("examine <item>", "Display item's types and description"));
                     System.out.println(commandDes("inventory", "Inspect your inventory"));
+                    System.out.println(commandDes("examine <item>", "Display item's types and description"));
                     System.out.println(commandDes("go <direction>", "Go in the direction (north, south, east, west) that you wanted"));
                     System.out.println(commandDes("take <item>", "Add an item that is available in your current location to your inventory"));
                     System.out.println(commandDes("take <item>  from <container>", "Add an item from a container to your inventory"));
