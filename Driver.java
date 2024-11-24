@@ -12,18 +12,6 @@ public class Driver {
     public static ContainerItem myInventory; 
 
     public static void main(String[] args) {
-        myInventory = new ContainerItem("Inventory", "Toolbox", "This is your inventory, which stores the items you feel that can be useful");
-
-        ///Create and initialize "Kitchen" location
-        currLocation = new Location("Kitchen", "A dark kitchen whose lights are flickering");
-
-        Item knifeItem = new Item("Knife", "Tool", "Dismantle and Cleave, with a huge red stain on it, likely blood");
-        Item turkeyItem = new Item("Turkey", "Food", "Some leftover turkey, smells terrible, likely rotten");
-        Item plateItem = new Item("Plate", "Utensils", "A cracked ceramic plate, can be used to hold foods");
-        currLocation.addItem(knifeItem);
-        currLocation.addItem(turkeyItem);
-        currLocation.addItem(plateItem);
-
         ///Scanner that reads its data from the standard input stream
         Scanner scanner = new Scanner(System.in);
 
@@ -88,10 +76,7 @@ public class Driver {
                     break;
                 case("take"):
                     ///Try to find the matching item at the current location, if found, remove from location and add to inventory, if not print "Cannot find that item here" 
-                    if (splttedCommand.length != 2) {
-                        System.out.println("Please specify the item you want to take");
-                    }
-                    else {
+                    if (splttedCommand.length == 2) {
                         Item itemFound = currLocation.getItem(splttedCommand[1]);
                         if (itemFound == null) {
                             System.out.println("Cannot find that item here");
@@ -100,6 +85,30 @@ public class Driver {
                             currLocation.removeItem(splttedCommand[1]);
                             myInventory.addItem(itemFound);
                         }
+                    }
+                    else if (splttedCommand.length > 2) {
+                        if (splttedCommand[2].equals("from")) {
+                            ContainerItem containerFound = (ContainerItem) currLocation.getItem(splttedCommand[3]);
+                            if (containerFound == null) {
+                                System.out.println("Cannot find that container here");
+                                break;
+                            }
+
+                            boolean itemFound = containerFound.hasItem(splttedCommand[1]);
+                            if (!itemFound) {
+                                System.out.println("Cannot find that item in this container");
+                            }
+                            else {
+                                Item itemRemoved = containerFound.removeItem(splttedCommand[1]);
+                                myInventory.addItem(itemRemoved);
+                            }
+                        }
+                        else {
+                            System.out.println("Invalid command format. Use 'take <item>' or 'take <item> from <container>");
+                        }
+                    }
+                    else {
+                        System.out.println("Please specify the item you want to take");
                     }
                     break;
                 case("drop"):
@@ -118,14 +127,43 @@ public class Driver {
                         }
                     }
                     break;
+                case ("put"):
+                    if (splttedCommand.length == 4) {
+                        if (splttedCommand[2].equals("in")) {
+                            ContainerItem containerFound = (ContainerItem) currLocation.getItem(splttedCommand[3]);
+
+                            if (containerFound == null) {
+                                System.out.println("Cannot find that container here");
+                                break;
+                            }
+
+                            boolean itemFound = myInventory.hasItem(splttedCommand[1]);
+                            if (!itemFound) {
+                                System.out.println("Cannot find that item in this container");
+                            }
+                            else {
+                                Item itemRemoved = myInventory.removeItem(splttedCommand[1]);
+                                containerFound.addItem(itemRemoved);
+                            }
+                        }
+                        else {
+                            System.out.println("Invalid command format. Use 'put <item> in <container>'");
+                        }
+                    }
+                    else {
+                        System.out.println("Please specify what item and where you want to put it");
+                    }
+                    break;
                 case("help"):
                     ///Print all the commands currently supported with a one-sentence description
                     System.out.println(commandDes("look", "Display location's name, description and item available there"));
-                    System.out.println(commandDes("examine", "Display item's types and description"));
+                    System.out.println(commandDes("examine <item>", "Display item's types and description"));
                     System.out.println(commandDes("inventory", "Inspect your inventory"));
-                    System.out.println(commandDes("go", "Go in the direction that you wanted"));
-                    System.out.println(commandDes("take", "Add an item that is available in your current location to your inventory"));
-                    System.out.println(commandDes("drop", "Drop an item from you inventory"));
+                    System.out.println(commandDes("go <direction>", "Go in the direction (north, south, east, west) that you wanted"));
+                    System.out.println(commandDes("take <item>", "Add an item that is available in your current location to your inventory"));
+                    System.out.println(commandDes("take <item>  from <container>", "Add an item from a container to your inventory"));
+                    System.out.println(commandDes("drop <item>", "Drop an item from you inventory"));
+                    System.out.println(commandDes("put <item> in <container>", "Put an item that is in your inventory in a container at your current location"));
                     System.out.println(commandDes("quit", "Exit the game"));
                     break;
                 case ("quit"):
@@ -146,10 +184,15 @@ public class Driver {
     }
 
     public static void createWorld() {
+        myInventory = new ContainerItem("Inventory", "Toolbox", "This is your inventory, which stores the items you feel that can be useful");
+
+        ///Create and initialize "Kitchen" location
         Location kitchen = new Location("Kitchen", "A dark kitchen whose lights are flickering");
         Location hallway = new Location("Hallway", "A long line");
         Location bedroom = new Location("Bedroom", "A place for rest");
         Location livingroom = new Location("Livingroom", "Not a living room");
+
+        currLocation = kitchen;
 
         Item knifeItem = new Item("Knife", "Tool", "Dismantle and Cleave, with a huge red stain on it, likely blood");
         Item turkeyItem = new Item("Turkey", "Food", "Some leftover turkey, smells terrible, likely rotten");
@@ -197,7 +240,5 @@ public class Driver {
 
         livingroom.connect("south", kitchen);
         kitchen.connect("north", livingroom);
-
-        currLocation = kitchen;
     }
 }
